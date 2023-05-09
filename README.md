@@ -2,7 +2,7 @@
 
 # **DOGS** | Proyecto Individual
 
-## **📌 OBJETIVOS**
+## **📌 OBJETIVOS***
 
 -  Construir una Single Page Application utlizando las tecnologías: **React**, **Redux**, **Node**, **Express** y **Sequelize**.
 -  Poner en práctica recursos básicos de estilos y diseño (UX : UI).
