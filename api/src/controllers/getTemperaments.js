@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Temperamentos } = require("../db");
+const registerTemperamento = require("../handlers/registerTemperamentos");
 const {
  LLAVE_API
 } = process.env;
@@ -18,15 +18,13 @@ const getTemperaments = async (req,res) => {
        let setSinRepetidos = new Set(aArray);
        let arregloSinRepetidos = Array.from(setSinRepetidos);
         //creando temperamentos
+//        const { temperamento, created } = await registerTemperamento(item="asd");
+
         for(var j=0;j<arregloSinRepetidos.length;j++){
-          const [temperamento, created]= await Temperamentos.findOrCreate({
-            where: {},
-            default:{
-              temperamento : arregloSinRepetidos[j]
-            }
-          });
+          item2=arregloSinRepetidos[j];
+          const { temperamento, created } = await registerTemperamento(item2);
         }
-       res.status(200).json({message: "se registro con exito"});      
+       res.status(200).json( "arregloSinRepetidos[1]" );      
     } catch (error) {
       res.status(500).json({message: "error 500."});
     }

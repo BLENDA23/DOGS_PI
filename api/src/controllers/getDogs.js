@@ -7,7 +7,7 @@ const URL = "https://api.thedogapi.com/v1/breeds";
 const getDogs = async (req,res) => {
  // res.send("todos los perros")
     try {
-        const {data} = await axios.get(URL+LLAVE_API)
+        const {data} = await axios.get(URL)
         //const { id,name } = data;
         res.status(200).json( data );
     } catch (error) {
