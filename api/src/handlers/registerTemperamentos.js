@@ -1,12 +1,7 @@
 const { Temperamentos } = require("../db");
-const registerTemperamento = async (item2) => {
+const registerTemperamento = async (tempe) => {
   //
-  const [temperamento, created] = await Temperamentos.findOrCreate({
-    where: {},
-    defaults: { 
-        temperamento:item2
-    },
-  });
+  const [temperamento, created] = await Temperamentos.bulkCreate(tempe)
   return { temperamento, created };
 };
 

@@ -1,7 +1,6 @@
 import Card from "../card/Card";
 export default function Cards(props) {
   const { dogs } = props;
-  // characters --> [{}], onClose
   return (
     <div>
       {dogs.map(({ id, name, bred_for, breed_group, life_span,image }) => (

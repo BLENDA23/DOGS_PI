@@ -18,16 +18,14 @@ const getTemperaments = async (req,res) => {
        let setSinRepetidos = new Set(aArray);
        let arregloSinRepetidos = Array.from(setSinRepetidos);
         //creando temperamentos
-        const { temperamento, created } = await registerTemperamento(item="asd");
-      var item2=""
-      /*
-        for(var j=0;j<arregloSinRepetidos.length;j++){
-          
-          item2=arregloSinRepetidos[j];
-          const { temperamento, created } = await registerTemperamento(item2);
-        }
-        */
-       res.status(200).json( "asd" );      
+       var arregloBulkCreate=[];
+       for(var i=0;i<arregloSinRepetidos.length;i++){
+        arregloBulkCreate.push({temperamento:arregloSinRepetidos[i]})
+       } 
+      
+       const { temperamento, created } = await registerTemperamento(arregloBulkCreate);
+  
+       res.status(200).json( arregloBulkCreate );      
     } catch (error) {
       res.status(500).json({message: "error 500."});
     }
