@@ -4,30 +4,12 @@
     width: 230px;
     height: 270px;
     border-radius: 20px;
-    background-color: aliceblue;
+    background-color: rgb(100, 163, 219);
     transition: all 0.5s ease;
-    box-shadow: 0 0 20px rgba(9, 202, 202, 0.6);
+    box-shadow: 0 0 20px rgba(40, 48, 209, 0.6);
   }
   
   .container:hover {
-    transform: scale(1.1);
-  }
-  
-  .buttonContainer {
-    display: flex;
-    justify-content: space-between
-  }
-  
-  .button {
-    border-radius: 20px;
-    margin: 10px 10px 0 0;
-    border: none;
-    background-color: red;
-    color: aliceblue;
-  }
-  
-  .button:hover {
-    cursor: pointer;
     transform: scale(1.1);
   }
   
@@ -42,24 +24,6 @@
     align-items: center;
   }
   .name {
-    background-color: rgba(0, 255, 255, 0.6);
-    position: absolute;
+    background-color: rgba(54, 197, 197, 0.6);
     margin-bottom: 0px;
-  }
-  .propsContainer {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: black;
-    margin: 0px;
-    color: aqua;
-    border-radius: 0 0 20px 20px;
-  }
-  
-  .propsContainer h2 {
-      margin: 0;
-  }
-  
-  .link {
-    text-decoration: none;
-    color: inherit;
   }

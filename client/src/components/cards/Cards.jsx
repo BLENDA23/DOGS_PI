@@ -1,4 +1,5 @@
 import Card from "../card/Card";
+import styles from "./Cards.module.css";
 export default function Cards(props) {
   const { dogs } = props;
   return (

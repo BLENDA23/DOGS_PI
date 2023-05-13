@@ -11,10 +11,11 @@ export default function Detail(props) {
     const fetchSingleDogData = async () => {
       try {
         const res = await fetch(
-            `http://localhost:3001/dogsDetail/${detailId}`
+            `http://localhost:3001/dogs/${detailId}`
         )
         const data = await res.json()
-        setDogs(data)
+        .then (data => setDogs([...dogs, data]));
+        console.log(data)
       } catch (error) {
         console.error(error)
       }
@@ -25,10 +26,10 @@ export default function Detail(props) {
 
   return (
     <div>
-        <button onClick={() => navigate(-1)}>Regresar</button>
         {dogs.map((item) => (
             <div key={item.id} className={styles.containerInfo}>
                 <h1>{item.name}</h1>
+                <img src={item.image.url} alt="Not found" />
                 <ul>
                     <li>Peso: {item.weight.metric}</li>
                     <li>Altura: {item.height.metric}</li>
@@ -38,10 +39,10 @@ export default function Detail(props) {
                     <li>Temperamento: {item.temperament}</li>
                     <li>Origen: {item.origin}</li>
                     <li>Esperanza de Vida: {item.life_span}</li>
-
-                </ul>    
+                </ul>  
             </div>
         ))}
+        <button className={styles.buttonDetail} onClick={() => navigate(-1)}>Regresar</button> 
     </div>
    
   );

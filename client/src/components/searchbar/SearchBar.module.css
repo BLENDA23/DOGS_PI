@@ -3,22 +3,22 @@
     justify-content: center;
   }
   input {
-    background-color: rgba(0, 255, 255, 0.6);
+    background-color: rgba(199, 84, 130, 0.6);
     font-family: cursive;
     border-radius: 10px 0 0 10px;
-    border-color: aqua;
+    border-color: rgb(218, 115, 213);
     outline: none;
   }
   button {
     border-radius: 0 10px 10px 0;
-    border-color: aqua;
-    color: aqua;
+    border-color: rgb(141, 68, 165);
+    color: rgb(170, 71, 158);
     background-color: #282c34;
   }
   
   button:hover {
     color: #282c34;
-    background-color: aqua;
+    background-color: rgb(17, 164, 164);
     cursor: pointer;
   }
   

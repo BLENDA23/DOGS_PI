@@ -1,8 +1,23 @@
 .container {
-    
     color: aliceblue;
 }
 .containerInfo{
 display: flex;
     justify-content: space-around;
 }
+.buttonDetail {
+    font-size:30px;
+    font-family:Verdana,Helvetica;
+    font-weight:bold;
+    color:white;
+    background:#638cb5;
+    border:0px;
+    width:300px;
+    height:100px;
+   }
+  
+.buttonDetail:hover {
+    color: #282c34;
+    background-color: rgb(17, 164, 164);
+    cursor: pointer;
+  }
