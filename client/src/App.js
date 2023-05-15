@@ -12,6 +12,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [dogs, setDogs] = useState([]);
+  const [registro, setRegistro] = useState(false);
   //const [searched, setSearched] = useState(false);
   useEffect(() => {
     const fetchDogData = async () => {
@@ -63,6 +64,26 @@ function App() {
       console.error(error)
     }
   };
+  const registroRaza=async (razaData)=>{
+      const{nombre,peso,altura,tiempoVida,image}=razaData;
+      const data= new URLSearchParams(`nombre=${nombre}&peso=${peso}&altura=${altura}&tiempoVida=${tiempoVida}&image=${image}`);
+      fetch('http://localhost:3001/dogsP/',{
+        method: 'POST',
+        body: data
+      }).then(function(response){
+        if(response.ok) {
+          return response.text()
+        } else {
+          throw "Error en la llamada Ajax";
+        }
+      }).then(function(texto) {
+        console.log(texto);
+     })
+     .catch(function(err) {
+        console.log(err);
+     });
+      
+  }
   return (
     <div className="App">
       {location.pathname !== "/" && <Nav onSearch={onSearch}/>}
@@ -70,7 +91,7 @@ function App() {
         <Route path="/" element={<Bienvenida/>}></Route>
         <Route path="/homePage" element={<Cards dogs={dogs} />}></Route>
         <Route path="/about" element={<About/>}></Route>
-        <Route path="/crearDog" element={<FormRedistroDogs/>}></Route>
+        <Route path="/crearDog" element={<FormRedistroDogs registroRaza={registroRaza}/>}></Route>
         <Route path="/detail/:detailId" element={<Detail />} />
       </Routes>
     </div>
