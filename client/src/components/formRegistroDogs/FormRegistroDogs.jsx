@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { validate } from "./validation";
 export default function FormRegistroDogs(props){
   const [razaData, setRazaData] = useState({
-    nombre: "razabb",
-    peso: "raza",
-    altura: "raza",
-    tiempoVida: "raza",
+    nombre: "",
+    peso: "",
+    altura: "",
+    tiempoVida: "",
     //temperamento: "raza",
-    image: "raza",
+    image: "",
    }); 
    const [errors, setErrors] = useState({
     nombre: "",
@@ -18,18 +18,20 @@ export default function FormRegistroDogs(props){
     //temperamento: "raza",
     image: "",
   });
+  
   const handleChange = (event) => {
-    const { raza, value } = event.target;
+    const { name, value } = event.target;
     setRazaData({
       ...razaData,
-      [raza]: value,
+      [name]: value,
     });
     setErrors(
       validate({
         ...razaData,
-        [raza]: value,
+        [name]: value,
       })
     );
+
   };
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,9 +49,9 @@ export default function FormRegistroDogs(props){
               <input 
                 type="text" 
                 value={razaData.nombre}
-                name="raza" 
+                name="nombre" 
                 onChange={handleChange} 
-                className={errors.nombre}
+                //className={errors.nombre}
               />
               <br />
               <label htmlFor="">Peso</label>
@@ -71,7 +73,7 @@ export default function FormRegistroDogs(props){
               <label htmlFor="">tiempoVida:</label>
               <input 
                 type="text" 
-                name="criado_para" 
+                name="tiempoVida" 
                 value={razaData.tiempoVida} 
                 onChange={handleChange}
               />
@@ -79,7 +81,7 @@ export default function FormRegistroDogs(props){
               <label htmlFor="">image:</label>
               <input 
                 type="text" 
-                name="temperamento" 
+                name="image" 
                 value={razaData.image} 
                 onChange={handleChange}
               />

@@ -2,6 +2,9 @@ import Card from "../card/Card";
 import styles from "./Cards.module.css";
 export default function Cards(props) {
   const { dogs } = props;
+  console.log(dogs);
+
+   
   return (
     <div>
       {dogs.map(({ id, name, bred_for, breed_group, life_span,image }) => (
@@ -15,6 +18,8 @@ export default function Cards(props) {
           image={image}
         />
       ))}
+    
+      
     </div>
   );
 }

@@ -8,9 +8,10 @@ export default function Card({ id,name, bred_for, breed_group, life_span,image})
             <h2 className={styles.name}>{name}</h2>
             <img src={image.url} alt="Not found" />
             </div>
-            
          </div>
+        
       </Link>
+      
     );
  }
  

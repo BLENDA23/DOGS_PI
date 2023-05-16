@@ -1,8 +1,9 @@
 export const validate = (inputs) => {
     // inputs --. {userName: "Feli", password :""}
     const errors = {};
-    if (!inputs.raza) {
-      errors.raza = "No puede ser vacio";
+    console.log(inputs);
+    if (!inputs.nombre) {
+      errors.nombre = "No puede ser vacio";
     }
     
     return errors;

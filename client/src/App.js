@@ -74,7 +74,7 @@ function App() {
         if(response.ok) {
           return response.text()
         } else {
-          throw "Error en la llamada Ajax";
+          throw "Error en la llamada Fetch";
         }
       }).then(function(texto) {
         console.log(texto);
