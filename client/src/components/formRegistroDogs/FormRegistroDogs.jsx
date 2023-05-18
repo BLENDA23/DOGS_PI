@@ -36,6 +36,14 @@ export default function FormRegistroDogs(props){
   const handleSubmit = (event) => {
     event.preventDefault();
     props.registroRaza(razaData);
+    setRazaData({
+      nombre: "",
+      peso: "",
+      altura: "",
+      tiempoVida: "",
+      //temperamento: "raza",
+      image: "",
+    })
   };
 
     return(

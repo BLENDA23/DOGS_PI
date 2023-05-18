@@ -78,6 +78,7 @@ function App() {
         }
       }).then(function(texto) {
         console.log(texto);
+        alert('se registro correctamente')
      })
      .catch(function(err) {
         console.log(err);

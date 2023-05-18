@@ -7,7 +7,9 @@ export default function HomePage(props) {
       <div className={styles.container}>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>
+        <NavLink to="/homePage">Home Page</NavLink>
         <NavLink to="/crearDog">New Dogs</NavLink>
+        
         <SearchBar onSearch={(dogByRaza) => props.onSearch(dogByRaza)}></SearchBar>
       </div>
     );
