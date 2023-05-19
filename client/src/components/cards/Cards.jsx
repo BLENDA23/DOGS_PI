@@ -23,6 +23,7 @@ export default function Cards(props) {
 
   return (
     <div>
+      <div className={styles.container}>
       {paginatedItems.map(({ id, name, bred_for, breed_group, life_span,image,weight,temperament }) => (
         <Card
           id={id}
@@ -36,6 +37,7 @@ export default function Cards(props) {
           temperament={temperament}
         />
       ))}
+      </div>
     
       <div>
         {/* Botones de paginación */}
