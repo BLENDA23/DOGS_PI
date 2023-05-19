@@ -1,6 +1,6 @@
 const register = require("../handlers/registerDogs");
 
-const postDogs = async (req, res) => {
+const postDogs = async (req, res) => { 
   try {
     const { nombre, altura,peso,tiempoVida,image } = req.body;
     if (nombre === "")

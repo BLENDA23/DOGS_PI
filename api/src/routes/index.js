@@ -7,7 +7,7 @@ const getDogsNameLike=require('../controllers/getDogsNameLike');
 const postDogs=require('../controllers/postDogs');
 const getTemperaments=require('../controllers/getTemperaments');
 const getDogsDetail=require('../controllers/getDogsDetail');
-const router = Router();
+const router = Router(); 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/dogs/:idRaza",getDogsRaza);//para el buscador busqueda exacta

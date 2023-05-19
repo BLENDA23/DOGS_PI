@@ -1,6 +1,5 @@
 import styles from "./FormRegistroDogs.module.css";
 import { useEffect, useState } from "react";
-import { validate } from "./validation";
 export default function FormRegistroDogs(props){
   const [razaData, setRazaData] = useState({
     nombre: "",
@@ -10,14 +9,7 @@ export default function FormRegistroDogs(props){
     //temperamento: "raza",
     image: "",
    }); 
-   const [errors, setErrors] = useState({
-    nombre: "",
-    peso: "",
-    altura: "",
-    tiempoVida: "",
-    //temperamento: "raza",
-    image: "",
-  });
+   const [errores, setErrores] = useState({});
   
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -25,25 +17,42 @@ export default function FormRegistroDogs(props){
       ...razaData,
       [name]: value,
     });
-    setErrors(
-      validate({
-        ...razaData,
-        [name]: value,
-      })
-    );
-
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.registroRaza(razaData);
-    setRazaData({
-      nombre: "",
-      peso: "",
-      altura: "",
-      tiempoVida: "",
-      //temperamento: "raza",
-      image: "",
-    })
+    const nuevosErrores = {};
+    
+    // Validar el nombre
+    if (!razaData.nombre) {
+      nuevosErrores.nombre = 'El nombre es obligatorio';
+    }
+    if (!razaData.peso) {
+      nuevosErrores.peso = 'campo obligatorio';
+    }
+    if (!razaData.altura) {
+      nuevosErrores.altura = 'campo obligatorio';
+    }
+    if (!razaData.tiempoVida) {
+      nuevosErrores.tiempoVida = 'campo obligatorio';
+    }
+    if (!razaData.image) {
+      nuevosErrores.image = 'campo obligatorio';
+    }
+    setErrores(nuevosErrores);
+    if (Object.keys(nuevosErrores).length === 0) {
+      // Enviar el formulario
+      props.registroRaza(razaData);
+      //pone en blanco a campos
+      setRazaData({
+        nombre: "",
+        peso: "",
+        altura: "",
+        tiempoVida: "",
+        //temperamento: "raza",
+        image: "",
+      })
+    }
+    
   };
 
     return(
@@ -62,6 +71,8 @@ export default function FormRegistroDogs(props){
                 //className={errors.nombre}
               />
               <br />
+              {errores.nombre && <span>{errores.nombre}</span>}
+              <br />
               <label htmlFor="">Peso</label>
               <input 
                 type="text" 
@@ -69,6 +80,8 @@ export default function FormRegistroDogs(props){
                 value={razaData.peso} 
                 onChange={handleChange}
               />
+              <br />
+              {errores.peso && <span>{errores.peso}</span>}
               <br />
               <label htmlFor="">Altura:</label>
               <input 
@@ -78,6 +91,8 @@ export default function FormRegistroDogs(props){
                 onChange={handleChange}
               />
               <br />
+              {errores.altura && <span>{errores.altura}</span>}
+              <br />
               <label htmlFor="">tiempoVida:</label>
               <input 
                 type="text" 
@@ -86,6 +101,8 @@ export default function FormRegistroDogs(props){
                 onChange={handleChange}
               />
               <br />
+              {errores.tiempoVida && <span>{errores.tiempoVida}</span>}
+              <br />
               <label htmlFor="">image:</label>
               <input 
                 type="text" 
@@ -93,6 +110,8 @@ export default function FormRegistroDogs(props){
                 value={razaData.image} 
                 onChange={handleChange}
               />
+              <br />
+              {errores.image && <span>{errores.image}</span>}
               <br />
               
               <button type="submit">Registrar</button>
