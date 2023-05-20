@@ -1,11 +1,13 @@
 import Card from "../card/Card";
 import styles from "./Cards.module.css";
+import SearchBar from "../searchbar/SearchBar";
 import { useEffect, useState } from "react";
 export default function Cards(props) {
   const { dogs } = props;
   console.log(dogs);
+  
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8; // Cantidad de elementos por página
+  const itemsPerPage = 200; // Cantidad de elementos por página
   const totalItems = 100; // Cantidad total de elementos en la lista
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -23,6 +25,7 @@ export default function Cards(props) {
 
   return (
     <div>
+      <SearchBar onSearch={(dogByRaza) => props.onSearch(dogByRaza)}></SearchBar>
       <div className={styles.container}>
       {paginatedItems.map(({ id, name, bred_for, breed_group, life_span,image,weight,temperament }) => (
         <Card

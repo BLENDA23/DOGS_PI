@@ -87,10 +87,10 @@ function App() {
   }
   return (
     <div className="App">
-      {location.pathname !== "/" && <Nav onSearch={onSearch}/>}
+      {location.pathname !== "/" && <Nav/>}
       <Routes>
         <Route path="/" element={<Bienvenida/>}></Route>
-        <Route path="/homePage" element={<Cards dogs={dogs} />}></Route>
+        <Route path="/homePage" element={<Cards dogs={dogs}  onSearch={onSearch}/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/crearDog" element={<FormRedistroDogs registroRaza={registroRaza}/>}></Route>
         <Route path="/detail/:detailId" element={<Detail />} />

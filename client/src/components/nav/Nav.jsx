@@ -9,8 +9,6 @@ export default function HomePage(props) {
         <NavLink to="/about">About</NavLink>
         <NavLink to="/homePage">Home Page</NavLink>
         <NavLink to="/crearDog">New Dogs</NavLink>
-        
-        <SearchBar onSearch={(dogByRaza) => props.onSearch(dogByRaza)}></SearchBar>
       </div>
     );
 }
