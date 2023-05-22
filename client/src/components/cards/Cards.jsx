@@ -25,7 +25,7 @@ export default function Cards(props) {
 
   return (
     <div>
-      <SearchBar onSearch={(dogByRaza) => props.onSearch(dogByRaza)}></SearchBar>
+      <SearchBar ></SearchBar>
       <div className={styles.container}>
       {paginatedItems.map(({ id, name, bred_for, breed_group, life_span,image,weight,temperament }) => (
         <Card

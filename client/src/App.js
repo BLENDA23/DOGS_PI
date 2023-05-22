@@ -6,14 +6,14 @@ import Nav from "./components/nav/Nav";
 import About from "./components/homePage/HomePage";
 import Cards from "./components/cards/Cards";
 import Detail from "./components/detail/Detail";
+import DetailBusqueda from "./components/busqueda/DetailBusqueda";
 import FormRedistroDogs from "./components/formRegistroDogs/FormRegistroDogs";
 import { Routes, Route,useLocation, useNavigate  } from "react-router-dom";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [dogs, setDogs] = useState([]);
-  const [registro, setRegistro] = useState(false);
-  //const [searched, setSearched] = useState(false);
+  const [searched, setSearched] = useState([]);
   useEffect(() => {
     const fetchDogData = async () => {
       try {
@@ -59,41 +59,53 @@ function App() {
     try{
       const res = await fetch(`http://localhost:3001/dogs/${id}`)
       const data = await res.json()
-      .then (data => setDogs([...dogs, data]));
+      .then (data => setDogs([...searched, data]));
     }catch(error){
       console.error(error)
     }
   };
   const registroRaza=async (razaData)=>{
-      const{nombre,peso,altura,tiempoVida,image}=razaData;
-      const data= new URLSearchParams(`nombre=${nombre}&peso=${peso}&altura=${altura}&tiempoVida=${tiempoVida}&image=${image}`);
-      fetch('http://localhost:3001/dogsP/',{
-        method: 'POST',
-        body: data
-      }).then(function(response){
-        if(response.ok) {
-          return response.text()
+      const{nombre,peso,altura,tiempoVida,image,temperamento}=razaData;
+      const url='http://localhost:3001/dogsP/';
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            nombre,
+            peso,
+            altura,
+            tiempoVida,
+            image,
+            temperamento,
+          }),
+        });
+  
+        if (response.ok) {
+          // Procesa la respuesta exitosa
+          console.log('Datos enviados correctamente');
+          alert('se registro correctamente');
         } else {
-          throw "Error en la llamada Fetch";
+          // Procesa la respuesta de error
+          console.error('Error al enviar los datos:', response.status);
+          alert('Error al enviar los datos');
         }
-      }).then(function(texto) {
-        console.log(texto);
-        alert('se registro correctamente')
-     })
-     .catch(function(err) {
-        console.log(err);
-     });
-      
+      } catch (error) {
+        console.error('Error de red:', error);
+      }
   }
   return (
     <div className="App">
       {location.pathname !== "/" && <Nav/>}
       <Routes>
         <Route path="/" element={<Bienvenida/>}></Route>
-        <Route path="/homePage" element={<Cards dogs={dogs}  onSearch={onSearch}/>}></Route>
+        <Route path="/homePage" element={<Cards dogs={dogs}/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/crearDog" element={<FormRedistroDogs registroRaza={registroRaza}/>}></Route>
         <Route path="/detail/:detailId" element={<Detail />} />
+        <Route path="/busqueda/:busquedaId" element={<DetailBusqueda />} />
       </Routes>
     </div>
   );

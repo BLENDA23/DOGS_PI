@@ -6,10 +6,15 @@ export default function FormRegistroDogs(props){
     peso: "",
     altura: "",
     tiempoVida: "",
-    //temperamento: "raza",
+    temperamento:"",
     image: "",
    }); 
    const [errores, setErrores] = useState({});
+
+   const handleInputChange = (event) => {
+    const valor = event.target.value;
+
+  };
   
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -38,6 +43,9 @@ export default function FormRegistroDogs(props){
     if (!razaData.image) {
       nuevosErrores.image = 'campo obligatorio';
     }
+    if (!razaData.temperamento) {
+      nuevosErrores.temperamento = 'campo obligatorio';
+    }
     setErrores(nuevosErrores);
     if (Object.keys(nuevosErrores).length === 0) {
       // Enviar el formulario
@@ -48,7 +56,7 @@ export default function FormRegistroDogs(props){
         peso: "",
         altura: "",
         tiempoVida: "",
-        //temperamento: "raza",
+        temperamento: "",
         image: "",
       })
     }
@@ -103,12 +111,24 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.tiempoVida && <span>{errores.tiempoVida}</span>}
               <br />
+              <label htmlFor="">temperamento:</label>
+              <input 
+                type="text" 
+                name="temperamento" 
+                value={razaData.temperamento} 
+                onChange={handleChange}
+              />
+              
+              <br />
+              {errores.temperamento && <span>{errores.temperamento}</span>}
+              <br />
               <label htmlFor="">image:</label>
               <input 
                 type="text" 
                 name="image" 
                 value={razaData.image} 
                 onChange={handleChange}
+                handleInputChange ={handleInputChange }
               />
               <br />
               {errores.image && <span>{errores.image}</span>}
