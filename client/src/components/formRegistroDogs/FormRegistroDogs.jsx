@@ -1,6 +1,8 @@
 import styles from "./FormRegistroDogs.module.css";
 import { useEffect, useState } from "react";
 export default function FormRegistroDogs(props){
+  const [pesoMaximo, setPesoMaximo] = useState('');
+  const [pesoMinimo, setPesoMinimo] = useState('');
   const [razaData, setRazaData] = useState({
     nombre: "",
     peso: "",

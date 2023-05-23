@@ -53,17 +53,6 @@ function App() {
     }
 }
 */
-  const onSearch = async (id) => {
-    //console.log(ejemplo)
-   // setDogs([...dogs,ejemplo])
-    try{
-      const res = await fetch(`http://localhost:3001/dogs/${id}`)
-      const data = await res.json()
-      .then (data => setDogs([...searched, data]));
-    }catch(error){
-      console.error(error)
-    }
-  };
   const registroRaza=async (razaData)=>{
       const{nombre,peso,altura,tiempoVida,image,temperamento}=razaData;
       const url='http://localhost:3001/dogsP/';
