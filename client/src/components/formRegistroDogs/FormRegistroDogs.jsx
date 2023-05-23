@@ -13,17 +13,18 @@ export default function FormRegistroDogs(props){
    }); 
    const [errores, setErrores] = useState({});
 
-   const handleInputChange = (event) => {
-    const valor = event.target.value;
-
-  };
-  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setRazaData({
       ...razaData,
       [name]: value,
     });
+  };
+  const handlePesoMaximoChange = (event) => {
+    setPesoMaximo(event.target.value);
+  };
+  const handlePesoMinimoChange = (event) => {
+    setPesoMinimo(event.target.value);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -33,9 +34,14 @@ export default function FormRegistroDogs(props){
     if (!razaData.nombre) {
       nuevosErrores.nombre = 'El nombre es obligatorio';
     }
-    if (!razaData.peso) {
-      nuevosErrores.peso = 'campo obligatorio';
+    /*
+    if (!pesoMinimo.pesoMinimo) {
+      nuevosErrores.pesoMinimo = 'campo obligatorio';
     }
+    if (!pesoMaximo.pesoMaximo) {
+      nuevosErrores.pesoMaximo = 'campo obligatorio';
+    }
+    */
     if (!razaData.altura) {
       nuevosErrores.altura = 'campo obligatorio';
     }
@@ -50,8 +56,14 @@ export default function FormRegistroDogs(props){
     }
     setErrores(nuevosErrores);
     if (Object.keys(nuevosErrores).length === 0) {
-      // Enviar el formulario
-      props.registroRaza(razaData);
+      // Combinar el valor de peso y peso máximo con un guion
+      const pesoCompleto = `${pesoMaximo}-${pesoMinimo}`;
+      // Enviar el formulario con los datos actualizados
+      const datosActualizados = {
+        ...razaData,
+        peso: pesoCompleto,
+      };
+      props.registroRaza(datosActualizados);
       //pone en blanco a campos
       setRazaData({
         nombre: "",
@@ -60,7 +72,9 @@ export default function FormRegistroDogs(props){
         tiempoVida: "",
         temperamento: "",
         image: "",
-      })
+      });
+      setPesoMaximo("");
+      setPesoMinimo("");
     }
     
   };
@@ -83,15 +97,26 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.nombre && <span>{errores.nombre}</span>}
               <br />
-              <label htmlFor="">Peso</label>
+              <label htmlFor="">Peso Minimo</label>
               <input 
                 type="text" 
-                name="peso" 
-                value={razaData.peso} 
-                onChange={handleChange}
+                name="pesoMinimo" 
+                value={pesoMinimo} 
+                onChange={handlePesoMinimoChange}
               />
               <br />
-              {errores.peso && <span>{errores.peso}</span>}
+              {errores.pesoMinimo&& <span>{errores.pesoMinimo}</span>}
+              <br />
+              <br />
+              <label htmlFor="">Peso Maximo</label>
+              <input 
+                type="text" 
+                name="pesoMaximo" 
+                value={pesoMaximo} 
+                onChange={handlePesoMaximoChange}
+              />
+              <br />
+              {errores.pesoMaximo && <span>{errores.pesoMaximo}</span>}
               <br />
               <label htmlFor="">Altura:</label>
               <input 
@@ -130,7 +155,6 @@ export default function FormRegistroDogs(props){
                 name="image" 
                 value={razaData.image} 
                 onChange={handleChange}
-                handleInputChange ={handleInputChange }
               />
               <br />
               {errores.image && <span>{errores.image}</span>}
