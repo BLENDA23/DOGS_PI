@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 export default function FormRegistroDogs(props){
   const [pesoMaximo, setPesoMaximo] = useState('');
   const [pesoMinimo, setPesoMinimo] = useState('');
+  const [alturaMaxima, setAlturaMaxima] = useState('');
+  const [alturaMinima, setAlturaMinima] = useState('');
   const [razaData, setRazaData] = useState({
     nombre: "",
     peso: "",
@@ -26,6 +28,12 @@ export default function FormRegistroDogs(props){
   const handlePesoMinimoChange = (event) => {
     setPesoMinimo(event.target.value);
   };
+  const handleAlturaMaximaChange = (event) => {
+    setAlturaMaxima(event.target.value);
+  };
+  const handleAlturaMinimaChange = (event) => {
+    setAlturaMinima(event.target.value);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     const nuevosErrores = {};
@@ -34,17 +42,19 @@ export default function FormRegistroDogs(props){
     if (!razaData.nombre) {
       nuevosErrores.nombre = 'El nombre es obligatorio';
     }
-    /*
-    if (!pesoMinimo.pesoMinimo) {
+    if (!pesoMinimo) {
       nuevosErrores.pesoMinimo = 'campo obligatorio';
     }
-    if (!pesoMaximo.pesoMaximo) {
+    if (!pesoMaximo) {
       nuevosErrores.pesoMaximo = 'campo obligatorio';
     }
-    */
-    if (!razaData.altura) {
-      nuevosErrores.altura = 'campo obligatorio';
+    if (!alturaMaxima) {
+      nuevosErrores.alturaMaxima = 'campo obligatorio';
     }
+    if (!alturaMinima) {
+      nuevosErrores.alturaMinima = 'campo obligatorio';
+    }
+  
     if (!razaData.tiempoVida) {
       nuevosErrores.tiempoVida = 'campo obligatorio';
     }
@@ -57,11 +67,14 @@ export default function FormRegistroDogs(props){
     setErrores(nuevosErrores);
     if (Object.keys(nuevosErrores).length === 0) {
       // Combinar el valor de peso y peso máximo con un guion
-      const pesoCompleto = `${pesoMaximo}-${pesoMinimo}`;
+      const pesoCompleto = `${pesoMinimo}-${pesoMaximo}`;
+      const alturaCompleto = `${alturaMinima}-${alturaMaxima}`;
       // Enviar el formulario con los datos actualizados
+      console.log(alturaCompleto);
       const datosActualizados = {
         ...razaData,
         peso: pesoCompleto,
+        altura: alturaCompleto
       };
       props.registroRaza(datosActualizados);
       //pone en blanco a campos
@@ -118,15 +131,25 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.pesoMaximo && <span>{errores.pesoMaximo}</span>}
               <br />
-              <label htmlFor="">Altura:</label>
+              <label htmlFor="">Altura Minima:</label>
               <input 
                 type="text" 
-                name="altura" 
-                value={razaData.altura} 
-                onChange={handleChange}
+                name="alturaMinima" 
+                value={alturaMinima} 
+                onChange={handleAlturaMinimaChange}
               />
               <br />
-              {errores.altura && <span>{errores.altura}</span>}
+              {errores.alturaMinima && <span>{errores.alturaMinima}</span>}
+              <br />
+              <label htmlFor="">Altura Maxima:</label>
+              <input 
+                type="text" 
+                name="alturaMaxima" 
+                value={alturaMaxima} 
+                onChange={handleAlturaMaximaChange}
+              />
+              <br />
+              {errores.alturaMaxima && <span>{errores.alturaMaxima}</span>}
               <br />
               <label htmlFor="">tiempoVida:</label>
               <input 
@@ -159,11 +182,7 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.image && <span>{errores.image}</span>}
               <br />
-              
               <button type="submit">Registrar</button>
-              
-              <input type="text"></input>
-              
         </form>
     );
 }
