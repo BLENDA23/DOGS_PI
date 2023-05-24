@@ -23,8 +23,6 @@ export default function FormRegistroDogs(props){
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
     console.log(searchTerm);
-    
-    
   };
   const handleSearch = async () => {
     try {

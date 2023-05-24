@@ -15,7 +15,10 @@ const getTemperaments = async (req,res) => {
         }
        texto=temperamentos.toString();
        aArray=texto.split(',');
-       let setSinRepetidos = new Set(aArray);
+        var a1=aArray.map(item=>{
+          return item.trim();
+        })
+       let setSinRepetidos = new Set(a1);
        let arregloSinRepetidos = Array.from(setSinRepetidos);
         //creando temperamentos
        var arregloBulkCreate=[];
