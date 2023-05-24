@@ -5,6 +5,11 @@ export default function FormRegistroDogs(props){
   const [pesoMinimo, setPesoMinimo] = useState('');
   const [alturaMaxima, setAlturaMaxima] = useState('');
   const [alturaMinima, setAlturaMinima] = useState('');
+  //buscador
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedTemperamentos, setSelectedTemperamentos] = useState([]);
+  const [selectedIdTemperamentos, setSelectedIdTemperamentos] = useState([]);
   const [razaData, setRazaData] = useState({
     nombre: "",
     peso: "",
@@ -14,6 +19,38 @@ export default function FormRegistroDogs(props){
     image: "",
    }); 
    const [errores, setErrores] = useState({});
+   //buscador
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+    console.log(searchTerm);
+    
+    
+  };
+  const handleSearch = async () => {
+    try {
+      // Realizar la solicitud a la API con el término de búsqueda
+      const response = await fetch(`http://localhost:3001/temperamentosDB/${searchTerm}`);
+      const data = await response.json();
+      const temperamentos = data.map((item) => ({ id: item.idTemperamento, temperamento: item.temperamento })); // Obtener los valores de 'idTemperamento' y 'temperamento'
+      setSearchResults([...searchResults, ...temperamentos]); // Agregar los valores al estado 'searchResults'
+      console.log("searchResults", temperamentos);
+    } catch (error) {
+      console.error("Error al realizar la búsqueda:", error);
+      setErrores({ ...errores, searchError: "Error al realizar la búsqueda" });
+    }
+    setSearchTerm("");
+  };
+  const handleSelect = (result) => {
+    // Lógica para manejar la selección del resultado
+    console.log("Resultado seleccionado:", result);
+    setSelectedTemperamentos([...selectedTemperamentos, result.temperamento]);
+    setSelectedIdTemperamentos([...selectedIdTemperamentos, result.id]);
+    console.log("selectedTemperamentos");
+    console.log(selectedTemperamentos);
+    console.log("selected id Temperamentos");
+    console.log(selectedIdTemperamentos);
+    setSearchResults([]);
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -41,6 +78,9 @@ export default function FormRegistroDogs(props){
     // Validar el nombre
     if (!razaData.nombre) {
       nuevosErrores.nombre = 'El nombre es obligatorio';
+    }
+    if (selectedTemperamentos.length === 0) {
+      nuevosErrores.selectedTemperamentos = 'campo obligatorio';
     }
     if (!pesoMinimo) {
       nuevosErrores.pesoMinimo = 'campo obligatorio';
@@ -71,10 +111,13 @@ export default function FormRegistroDogs(props){
       const alturaCompleto = `${alturaMinima}-${alturaMaxima}`;
       // Enviar el formulario con los datos actualizados
       console.log(alturaCompleto);
+      console.log("selectedIdTemperamentos");
+      console.log(selectedIdTemperamentos);
       const datosActualizados = {
         ...razaData,
         peso: pesoCompleto,
-        altura: alturaCompleto
+        altura: alturaCompleto,
+        temperamento:selectedIdTemperamentos
       };
       props.registroRaza(datosActualizados);
       //pone en blanco a campos
@@ -88,6 +131,8 @@ export default function FormRegistroDogs(props){
       });
       setPesoMaximo("");
       setPesoMinimo("");
+      setAlturaMaxima("");
+      setAlturaMinima("");
     }
     
   };
@@ -160,17 +205,6 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.tiempoVida && <span>{errores.tiempoVida}</span>}
               <br />
-              <label htmlFor="">temperamento:</label>
-              <input 
-                type="text" 
-                name="temperamento" 
-                value={razaData.temperamento} 
-                onChange={handleChange}
-              />
-              
-              <br />
-              {errores.temperamento && <span>{errores.temperamento}</span>}
-              <br />
               <label htmlFor="">image:</label>
               <input 
                 type="text" 
@@ -180,6 +214,24 @@ export default function FormRegistroDogs(props){
               />
               <br />
               {errores.image && <span>{errores.image}</span>}
+              <br />
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder="Buscar..."
+              />
+              <button onClick={handleSearch}>Buscar</button>
+              <ul>
+                {searchResults.map((result) => (
+                  <li key={result.id} onClick={() => handleSelect(result)}>
+                    {result.temperamento}
+                  </li>
+                ))}
+              </ul>
+              <input type="text" value={selectedTemperamentos} readOnly />
+              {errores.selectedTemperamentos && <span>{errores.selectedTemperamentos}</span>}
+              <input type="text" value={selectedIdTemperamentos} readOnly />
               <br />
               <button type="submit">Registrar</button>
         </form>

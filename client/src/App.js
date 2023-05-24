@@ -79,7 +79,7 @@ function App() {
         } else {
           // Procesa la respuesta de error
           console.error('Error al enviar los datos:', response.status);
-          alert('Error al enviar los datos');
+          alert('Error al enviar los datos registroRaza');
         }
       } catch (error) {
         console.error('Error de red:', error);
