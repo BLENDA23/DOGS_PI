@@ -20,7 +20,7 @@ export default function FormRegistroDogs(props){
     setRazaData({
       ...razaData,
       [name]: value,
-    });
+    }); 
   };
   const handlePesoMaximoChange = (event) => {
     setPesoMaximo(event.target.value);
@@ -119,7 +119,6 @@ export default function FormRegistroDogs(props){
               />
               <br />
               {errores.pesoMinimo&& <span>{errores.pesoMinimo}</span>}
-              <br />
               <br />
               <label htmlFor="">Peso Maximo</label>
               <input 
