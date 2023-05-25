@@ -7,6 +7,7 @@ import About from "./components/homePage/HomePage";
 import Cards from "./components/cards/Cards";
 import Detail from "./components/detail/Detail";
 import DetailBusqueda from "./components/busqueda/DetailBusqueda";
+import DetailTemperamento from "./components/filtros/DetailTemperamento";
 import FormRedistroDogs from "./components/formRegistroDogs/FormRegistroDogs";
 import { Routes, Route,useLocation, useNavigate  } from "react-router-dom";
 function App() {
@@ -95,6 +96,7 @@ function App() {
         <Route path="/crearDog" element={<FormRedistroDogs registroRaza={registroRaza}/>}></Route>
         <Route path="/detail/:detailId" element={<Detail />} />
         <Route path="/busqueda/:busquedaId" element={<DetailBusqueda />} />
+        <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<DetailTemperamento />} />
       </Routes>
     </div>
   );

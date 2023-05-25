@@ -8,6 +8,7 @@ const postDogs=require('../controllers/postDogs');
 const getTemperaments=require('../controllers/getTemperaments');
 const getDogsDetail=require('../controllers/getDogsDetail');
 const getTemperamentoDB=require('../controllers/getTemperamentoDB');
+const getAllTemperamentoDB=require('../controllers/getAllTemperamentoDB');
 const router = Router(); 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
@@ -18,4 +19,5 @@ router.post("/dogsP/",postDogs);//creacion de perros
 router.get("/temperaments",getTemperaments); //inserta temperamentos a la bd
 router.get("/dogsDetail/:idRaza",getDogsDetail); // para el detalle de las cartas
 router.get("/temperamentosDB/:temperamento",getTemperamentoDB);//para peticion a la bd
+router.get("/temperamentosDB",getAllTemperamentoDB);//todas los temperamentos en la db
 module.exports = router;
