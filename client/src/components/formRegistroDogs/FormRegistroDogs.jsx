@@ -132,6 +132,8 @@ export default function FormRegistroDogs(props){
       setPesoMinimo("");
       setAlturaMaxima("");
       setAlturaMinima("");
+      setSelectedTemperamentos([]);
+      setSelectedIdTemperamentos([]);
     }
     
   };
@@ -154,9 +156,9 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.nombre && <span>{errores.nombre}</span>}
               <br />
-              <label htmlFor="">Peso Minimo</label>
+              <label htmlFor="">Peso Minimo(kg):</label>
               <input 
-                type="text" 
+                type="number" 
                 name="pesoMinimo" 
                 value={pesoMinimo} 
                 onChange={handlePesoMinimoChange}
@@ -164,9 +166,9 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.pesoMinimo&& <span>{errores.pesoMinimo}</span>}
               <br />
-              <label htmlFor="">Peso Maximo</label>
+              <label htmlFor="">Peso Maximo(kg):</label>
               <input 
-                type="text" 
+                type="number" 
                 name="pesoMaximo" 
                 value={pesoMaximo} 
                 onChange={handlePesoMaximoChange}
@@ -174,9 +176,9 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.pesoMaximo && <span>{errores.pesoMaximo}</span>}
               <br />
-              <label htmlFor="">Altura Minima:</label>
+              <label htmlFor="">Altura Minima(cm):</label>
               <input 
-                type="text" 
+                type="number" 
                 name="alturaMinima" 
                 value={alturaMinima} 
                 onChange={handleAlturaMinimaChange}
@@ -184,9 +186,9 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.alturaMinima && <span>{errores.alturaMinima}</span>}
               <br />
-              <label htmlFor="">Altura Maxima:</label>
+              <label htmlFor="">Altura Maxima(cm):</label>
               <input 
-                type="text" 
+                type="number" 
                 name="alturaMaxima" 
                 value={alturaMaxima} 
                 onChange={handleAlturaMaximaChange}
@@ -194,9 +196,9 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.alturaMaxima && <span>{errores.alturaMaxima}</span>}
               <br />
-              <label htmlFor="">tiempoVida:</label>
+              <label htmlFor="">TiempoVida(en años):</label>
               <input 
-                type="text" 
+                type="number" 
                 name="tiempoVida" 
                 value={razaData.tiempoVida} 
                 onChange={handleChange}
@@ -204,7 +206,7 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.tiempoVida && <span>{errores.tiempoVida}</span>}
               <br />
-              <label htmlFor="">image:</label>
+              <label htmlFor="">Imagen:</label>
               <input 
                 type="text" 
                 name="image" 
@@ -214,6 +216,7 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.image && <span>{errores.image}</span>}
               <br />
+              <label htmlFor="">Temperamento</label>
               <input
                 type="text"
                 value={searchTerm}
@@ -230,7 +233,7 @@ export default function FormRegistroDogs(props){
               </ul>
               <input type="text" value={selectedTemperamentos} readOnly />
               {errores.selectedTemperamentos && <span>{errores.selectedTemperamentos}</span>}
-              <input type="text" value={selectedIdTemperamentos} readOnly />
+              <input type="hidden" value={selectedIdTemperamentos} readOnly />
               <br />
               <button type="submit">Registrar</button>
         </form>

@@ -7,7 +7,7 @@ export default function Cards(props) {
   console.log(dogs);
   
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 200; // Cantidad de elementos por página
+  const itemsPerPage = 8; // Cantidad de elementos por página
   const totalItems = 100; // Cantidad total de elementos en la lista
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
