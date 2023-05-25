@@ -13,8 +13,9 @@ export default function Detail(props) {
             `http://localhost:3001/dogs/${detailId}`
         )
         const data = await res.json()
+
         .then (data => setDogs([...dogs, data]));
-        console.log(data)
+        console.log(dogs)
       } catch (error) {
         console.error(error)
       }

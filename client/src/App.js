@@ -96,7 +96,7 @@ function App() {
         <Route path="/crearDog" element={<FormRedistroDogs registroRaza={registroRaza}/>}></Route>
         <Route path="/detail/:detailId" element={<Detail />} />
         <Route path="/busqueda/:busquedaId" element={<DetailBusqueda />} />
-        <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<DetailTemperamento />} />
+        <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<DetailTemperamento dogs={dogs}/>} />
       </Routes>
     </div>
   );

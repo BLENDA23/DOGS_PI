@@ -1,5 +1,4 @@
 const buscarTemperamentosDB = require("../handlers/buscarTemperamentosDB");
-
 const getTemperamentoDB = async (req, res) => { 
   try {
     const { temperamento } = req.params;
