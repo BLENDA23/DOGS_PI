@@ -8,7 +8,7 @@ const register = async (nombre, altura,peso,tiempoVida,image,temperamento) => {
       peso,
       tiempoVida,
       image,
-    },
+    }, 
   });
   //si envio el temperamento lo relaciona
   if (temperamento && temperamento.length > 0) {

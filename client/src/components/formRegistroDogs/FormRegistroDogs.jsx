@@ -99,9 +99,7 @@ export default function FormRegistroDogs(props){
     if (!razaData.image) {
       nuevosErrores.image = 'campo obligatorio';
     }
-    if (!razaData.temperamento) {
-      nuevosErrores.temperamento = 'campo obligatorio';
-    }
+
     setErrores(nuevosErrores);
     if (Object.keys(nuevosErrores).length === 0) {
       // Combinar el valor de peso y peso máximo con un guion
@@ -111,11 +109,14 @@ export default function FormRegistroDogs(props){
       console.log(alturaCompleto);
       console.log("selectedIdTemperamentos");
       console.log(selectedIdTemperamentos);
+      var cadenaTemperamento=selectedIdTemperamentos.toString();
+      console.log("cadenaTemperamento");
+      console.log(cadenaTemperamento);
       const datosActualizados = {
         ...razaData,
-        peso: pesoCompleto,
+        peso: pesoCompleto, 
         altura: alturaCompleto,
-        temperamento:selectedIdTemperamentos
+        temperamento:cadenaTemperamento
       };
       props.registroRaza(datosActualizados);
       //pone en blanco a campos
@@ -219,7 +220,7 @@ export default function FormRegistroDogs(props){
                 onChange={handleSearchChange}
                 placeholder="Buscar..."
               />
-              <button onClick={handleSearch}>Buscar</button>
+              <button type="button" onClick={handleSearch}>Buscar</button>
               <ul>
                 {searchResults.map((result) => (
                   <li key={result.id} onClick={() => handleSelect(result)}>
