@@ -82,7 +82,7 @@ export default function DetailxOrigen() {
             <CardDB
                 id={id}
                 nombre={nombre}
-                temperamentos={temperamentos}
+                temperamentos={temperamentos[0].temperamento}
                 image={image}
                 tiempoVida={tiempoVida}
                 peso={peso}
