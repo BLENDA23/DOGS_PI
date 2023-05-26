@@ -9,12 +9,12 @@ import Detail from "./components/detail/Detail";
 import DetailBusqueda from "./components/busqueda/DetailBusqueda";
 import DetailTemperamento from "./components/filtros/DetailTemperamento";
 import FormRedistroDogs from "./components/formRegistroDogs/FormRegistroDogs";
-import { Routes, Route,useLocation, useNavigate  } from "react-router-dom";
+import { Routes, Route,useLocation, useNavigate,useParams  } from "react-router-dom";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [dogs, setDogs] = useState([]);
-  const [searched, setSearched] = useState([]);
+  const [raza, setRaza] = useState([]);
   useEffect(() => {
     const fetchDogData = async () => {
       try {
@@ -54,6 +54,7 @@ function App() {
     }
 }
 */
+
   const registroRaza=async (razaData)=>{
       const{nombre,peso,altura,tiempoVida,image,temperamento}=razaData;
       const url='http://localhost:3001/dogsP/';
@@ -86,6 +87,7 @@ function App() {
         console.error('Error de red:', error);
       }
   }
+
   return (
     <div className="App">
       {location.pathname !== "/" && <Nav/>}
@@ -96,7 +98,7 @@ function App() {
         <Route path="/crearDog" element={<FormRedistroDogs registroRaza={registroRaza}/>}></Route>
         <Route path="/detail/:detailId" element={<Detail />} />
         <Route path="/busqueda/:busquedaId" element={<DetailBusqueda />} />
-        <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<DetailTemperamento dogs={dogs}/>} />
+        <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<DetailTemperamento/>} />
       </Routes>
     </div>
   );
