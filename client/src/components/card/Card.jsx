@@ -1,6 +1,6 @@
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
-export default function Card({ id,name, bred_for, breed_group, life_span,image,weight,temperament}) {
+export default function Card({ name,image,weight,temperament}) {
     return (
       
       <Link to={`/detail/${name}`} >

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./DetailTemperamento.module.css";
+import CardDB from "../card/CardDB";
 import Card from "../card/Card";
 import SearchBar from "../searchbar/SearchBar";
 export default function DetailxOrigen() {
@@ -10,7 +11,7 @@ export default function DetailxOrigen() {
   var mostrarDiv=false;
   var raza='DB';
     useEffect(() => {
-        const fetchDogData = async () => {
+        const fetchDogDataApi = async () => {
           try {
             const res = await fetch("http://localhost:3001/dogs")
             const data = await res.json()
@@ -20,8 +21,34 @@ export default function DetailxOrigen() {
           }
         }
         if(busquedaxOrigen=='API'){
-            fetchDogData()
+          fetchDogDataApi()
         }
+    }, [])
+    useEffect(() => {
+      const fetchDogDataDB = async () => {
+        try {
+          const response = await fetch("http://localhost:3001/razasDB");
+          const data = await response.json();
+          setDogs(data);
+          console.log('data')
+          console.log(data)
+          /*
+          const razas2 = data.map((item) => ({
+            id: item.id,
+            nombre: item.nombre
+          }));
+          */
+         // setDogs(razas2);
+         
+        } catch (error) {
+          console.error("Error al obtener los temperamentos:", error);
+        }
+      };
+      if(busquedaxOrigen=='DB'){
+        fetchDogDataDB()
+        console.log('dogs')
+        console.log(dogs)
+      }
     }, [])
 
       if(busquedaxOrigen=='API'){
@@ -50,9 +77,19 @@ export default function DetailxOrigen() {
                 ))}
             </div>
         ) : (
-            <div>
-                <h1>dogs de bd</h1>
-            </div>
+          <div>
+            {dogs.map(({ id,nombre,temperamentos,image,tiempoVida,altura,peso }) => (
+            <CardDB
+                id={id}
+                nombre={nombre}
+                temperamentos={temperamentos}
+                image={image}
+                tiempoVida={tiempoVida}
+                peso={peso}
+                altura={altura}
+            />
+            ))}
+          </div>
         )}
   </div>
   );
