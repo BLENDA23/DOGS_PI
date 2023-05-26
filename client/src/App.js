@@ -8,6 +8,7 @@ import Cards from "./components/cards/Cards";
 import Detail from "./components/detail/Detail";
 import DetailBusqueda from "./components/busqueda/DetailBusqueda";
 import DetailTemperamento from "./components/filtros/DetailTemperamento";
+import DetailxOrigen from "./components/filtros/DetailxOrigen";
 import FormRedistroDogs from "./components/formRegistroDogs/FormRegistroDogs";
 import { Routes, Route,useLocation, useNavigate,useParams  } from "react-router-dom";
 function App() {
@@ -99,6 +100,7 @@ function App() {
         <Route path="/detail/:detailId" element={<Detail />} />
         <Route path="/busqueda/:busquedaId" element={<DetailBusqueda />} />
         <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<DetailTemperamento/>} />
+        <Route path="/filtrarxOrigen/:busquedaxOrigen" element={<DetailxOrigen/>} />
       </Routes>
     </div>
   );

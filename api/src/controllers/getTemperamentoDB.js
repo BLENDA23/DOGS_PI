@@ -1,8 +1,8 @@
-const buscarTemperamentosDB = require("../handlers/buscarTemperamentosDB");
+const buscarRazasDB = require("../handlers/buscarTemperamentosDB");
 const getTemperamentoDB = async (req, res) => { 
   try {
     const { temperamento } = req.params;
-    const resultado = await buscarTemperamentosDB(temperamento);
+    const resultado = await buscarRazasDB(temperamento);
     res.json(resultado); // Enviar la respuesta al cliente como JSON
   } catch (error) {
     console.error('Error al buscar por temperamento:', error);

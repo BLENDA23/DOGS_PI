@@ -7,6 +7,7 @@ export default function SearchBar(props) {
   const [dogs, setDogs] = useState("");
   const [temperamentos, setTemperamentos] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOptionOrigen, setSelectedOptionOrigen] = useState("");
   useEffect(() => {
     fetchTemperamentos();
   }, []);
@@ -32,8 +33,7 @@ export default function SearchBar(props) {
   const handleSelectChange = (event) => {
       const { value } = event.target;
       setSelectedOption(value);
-      console.log("selectedOption")
-      console.log(selectedOption)
+      setSelectedOptionOrigen(value);
  };
 
   return (
@@ -47,9 +47,19 @@ export default function SearchBar(props) {
         ))}
       </select>
       <Link to={`/filtrarTemperamento/${selectedOption}`}>
-        <button>Filtrar</button>
+        <button>FiltrarxTemperamento</button>
       </Link>
-      <input type="search" onChange={handleInputChange} />
+
+      <select value={selectedOptionOrigen} onChange={handleSelectChange}>
+      <option value="xx">Seleccionar</option>
+        <option value="API">API</option>
+        <option value="DB">DB</option>
+      </select>
+      <Link to={`/filtrarxOrigen/${selectedOptionOrigen}`}>
+        <button>FiltrarxOrigen</button>
+      </Link>
+      
+        <input type="search" onChange={handleInputChange} />
       <Link to={`/busqueda/${dogs}`}>
         <button>Buscar</button>
       </Link>

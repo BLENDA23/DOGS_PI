@@ -48,6 +48,7 @@ export default function DetailTemperamento() {
     
     <div >
       <SearchBar ></SearchBar>
+      <h2>Todos las razas que tengan el temperamento: {busquedaTemperamento}</h2>
       <div className={styles.container}>
     {paginatedItems.map(({ id,temperament,name, bred_for, breed_group, life_span,image,weight }) => (
       <Card
