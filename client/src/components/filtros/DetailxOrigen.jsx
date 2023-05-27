@@ -81,8 +81,9 @@ export default function DetailxOrigen() {
             {dogs.map(({ id,nombre,temperamentos,image,tiempoVida,altura,peso }) => (
             <CardDB
                 id={id}
+                key={id}
                 nombre={nombre}
-                temperamentos={temperamentos[0].temperamento}
+                temperamentos={Array.isArray(temperamentos) ? temperamentos[0]?.temperamento : ''}
                 image={image}
                 tiempoVida={tiempoVida}
                 peso={peso}
