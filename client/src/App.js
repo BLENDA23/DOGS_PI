@@ -100,7 +100,7 @@ function App() {
         <Route path="/detail/:detailId" element={<Detail />} />
         <Route path="/busqueda/:busquedaId" element={<DetailBusqueda />} />
         <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<DetailTemperamento/>} />
-        <Route path="/filtrarxOrigen/:busquedaxOrigen" element={<DetailxOrigen/>} />
+        <Route path="/filtrarxOrigen" element={<DetailxOrigen/>} />
       </Routes>
     </div>
   );

@@ -6,8 +6,6 @@ export default function Card({ name,image,weight,temperament}) {
       <Link to={`/detail/${name}`} >
          <div className={styles.container}>
             <div className={styles.imageContainer}>
-            <h3>{weight.metric !== '' ? weight.metric : weight.imperial}</h3> 
-            <h3>Peso:</h3>
             <h3>{temperament}</h3> 
             <h3>Temperamentos: </h3>
             <h2 className={styles.name}>{name}</h2>

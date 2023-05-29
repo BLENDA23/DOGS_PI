@@ -8,6 +8,8 @@ export default function SearchBar(props) {
   const [temperamentos, setTemperamentos] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedOptionOrigen, setSelectedOptionOrigen] = useState("");
+  const [selectedOptionAZ, setSelectedOptionAZ] = useState("");
+  const [selectedOptionPeso, setSelectedOptionPeso] = useState("");
   useEffect(() => {
     fetchTemperamentos();
   }, []);
@@ -34,7 +36,17 @@ export default function SearchBar(props) {
       const { value } = event.target;
       setSelectedOption(value);
       setSelectedOptionOrigen(value);
- };
+  };
+  const handleSelectChangeAZ = (event) => {
+    const { value } = event.target;
+    setSelectedOptionAZ(value);
+  };
+  const handleSelectChangePeso = (event) => {
+    const { value } = event.target;
+    setSelectedOptionPeso(value);
+  };
+
+ 
 
   return (
     <div className={styles.container}>
@@ -55,10 +67,22 @@ export default function SearchBar(props) {
         <option value="API">API</option>
         <option value="DB">DB</option>
       </select>
-      <Link to={`/filtrarxOrigen/${selectedOptionOrigen}`}>
-        <button>FiltrarxOrigen</button>
+
+      <select value={selectedOptionAZ} onChange={handleSelectChangeAZ}>
+      <option value="xx">Seleccionar</option>
+        <option value="A-Z">A-Z</option>
+        <option value="Z-A">Z-A</option>
+      </select>
+      <select value={selectedOptionPeso} onChange={handleSelectChangePeso}>
+      <option value="xx">Seleccionar</option>
+        <option value="menor-mayor">menor-mayor</option>
+        <option value="mayor-menor">mayor-menor</option>
+      </select>
+      <Link to={`/filtrarxOrigen?orden=${selectedOptionAZ}&origen=${selectedOptionOrigen}&peso${selectedOptionPeso}`}>
+        <button>Filtrar</button>
       </Link>
-      
+
+
         <input type="search" onChange={handleInputChange} />
       <Link to={`/busqueda/${dogs}`}>
         <button>Buscar</button>
