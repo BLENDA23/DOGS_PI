@@ -96,7 +96,7 @@ export default function DetailxOrigen() {
                 ))}
             </div>
         ) : (
-          <div>
+          <div className={styles.container}>
             {dogs.map(({ id,nombre,temperamentos,image,tiempoVida,altura,peso }) => (
             <CardDB
                 id={id}

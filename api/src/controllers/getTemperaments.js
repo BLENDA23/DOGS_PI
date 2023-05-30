@@ -23,7 +23,7 @@ const getTemperaments = async (req,res) => {
         //creando temperamentos
        var arregloBulkCreate=[];
        for(var i=0;i<arregloSinRepetidos.length;i++){
-        arregloBulkCreate.push({temperamento:arregloSinRepetidos[i]})
+        arregloBulkCreate.push({temperamento:arregloSinRepetidos[i].toLowerCase() })
        } 
       
        const { temperamento, created } = await registerTemperamento(arregloBulkCreate);
