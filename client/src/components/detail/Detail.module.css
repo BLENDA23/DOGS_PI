@@ -21,3 +21,10 @@ display: flex;
     background-color: rgb(17, 164, 164);
     cursor: pointer;
   }
+  .listItem {
+    color: rgb(179, 66, 72);
+    font-size: 16px;
+  }
+  .columnList {
+    columns: 2;
+  }

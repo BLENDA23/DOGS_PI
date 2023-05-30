@@ -1,6 +1,4 @@
-.container {
-    color: aliceblue;
-}
+
 .containerInfo{
 display: flex;
     justify-content: space-around;
@@ -20,4 +18,8 @@ display: flex;
     color: #282c34;
     background-color: rgb(17, 164, 164);
     cursor: pointer;
+  }
+  .listItem {
+    color: blue;
+    font-size: 16px;
   }

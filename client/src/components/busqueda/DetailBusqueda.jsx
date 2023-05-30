@@ -28,7 +28,7 @@ export default function DetailBusqueda() {
     <div>
       {dogs.map((item) => (
             <div key={item.id} className={styles.containerInfo}>
-                <h1>{item.name}</h1>
+                <h1 className={styles.listItem}>{item.name}</h1>
                 <img src={item.image.url} alt="Not found" />
                 <ul>
                     <li>Peso: {item.weight.metric}</li>
@@ -41,7 +41,9 @@ export default function DetailBusqueda() {
                     <li>Esperanza de Vida: {item.life_span}</li>
                 </ul>  
             </div>
+            
         ))}
+          <br/>
         <button id="refresh" className={styles.buttonDetail} onClick={() => navigate(-1)}>Regresar</button> 
     </div>
    

@@ -29,16 +29,16 @@ export default function Detail(props) {
         {dogs.map((item) => (
             <div key={item.id} className={styles.containerInfo}>
                 <h1>{item.name}</h1>
-                <img src={item.image.url} alt="Not found" />
-                <ul>
-                    <li>Peso: {item.weight.metric}</li>
-                    <li>Altura: {item.height.metric}</li>
-                    <li>Criado Para: {item.bred_for}</li>
-                    <li>Raza Grupo: {item.breed_group}</li>
-                    <li>Esperanza de Vida: {item.life_span}</li>
-                    <li>Temperamento: {item.temperament}</li>
-                    <li>Origen: {item.origin}</li>
-                    <li>Esperanza de Vida: {item.life_span}</li>
+                <img src={item.image.url} alt="Not found" height='200px'/>
+                <ul className={styles.columnList}>
+                    <li><p className={styles.listItem}>Peso:</p> {item.weight.metric}</li>
+                    <li><p className={styles.listItem}>Altura:</p> {item.height.metric}</li>
+                    <li><p className={styles.listItem}>Criado Para:</p> {item.bred_for}</li>
+                    <li><p className={styles.listItem}>Raza Grupo:</p> {item.breed_group}</li>
+                    <li><p className={styles.listItem}>Esperanza de Vida:</p> {item.life_span}</li>
+                    <li><p className={styles.listItem}>Temperamento:</p> {item.temperament}</li>
+                    <li><p className={styles.listItem}>Origen:</p> {item.origin}</li>
+                    <li><p className={styles.listItem}>Esperanza de Vida:</p> {item.life_span}</li>
                 </ul>  
             </div>
         ))}
