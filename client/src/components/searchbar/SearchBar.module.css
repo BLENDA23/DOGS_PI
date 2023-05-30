@@ -1,6 +1,7 @@
 .container {
     display: flex;
     justify-content: center;
+    padding: 20px;
   }
   input {
     background-color: rgba(199, 84, 130, 0.6);

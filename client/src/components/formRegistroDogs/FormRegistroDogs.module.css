@@ -1,0 +1,29 @@
+.buttonDetail {
+    font-size:30px;
+    font-family:Verdana,Helvetica;
+    font-weight:bold;
+    color:white;
+    background:#638cb5;
+    border:0px;
+    width:180px;
+    height:50px;
+   }
+  
+.buttonDetail:hover {
+    color: #282c34;
+    background-color: rgb(17, 164, 164);
+    cursor: pointer;
+  }
+
+  .container {
+    display: flex;
+  }
+  
+  .leftDiv {
+    padding: 150px; /* Espacio interno del div izquierdo */
+  }
+  
+  .rightDiv {
+    background-color: #5db3d4; /* Color de fondo del div derecho */
+    padding: 80px; /* Espacio interno del div derecho */
+  }

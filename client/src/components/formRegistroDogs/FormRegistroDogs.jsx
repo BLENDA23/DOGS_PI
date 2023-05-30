@@ -140,23 +140,28 @@ export default function FormRegistroDogs(props){
 
     return(
         <form onSubmit={handleSubmit}>
+          <div className={styles.container}>
+            <div className={styles.leftDiv}>
               <img
-                src="https://t1.ea.ltmcdn.com/es/posts/5/6/2/10_caracteristicas_de_los_perros_24265_600_square.jpg"
-                alt="Not found"
-              />
-              <br />
-              <label htmlFor="">Ingrese raza:</label>
+                  src="https://t1.ea.ltmcdn.com/es/posts/5/6/2/10_caracteristicas_de_los_perros_24265_600_square.jpg"
+                  alt="Not found"
+                />
+            </div>
+            <div className={styles.rightDiv}>
+              <p><h1>Registrar Raza</h1></p>
+            <label htmlFor="">Ingrese raza:</label>
+            <br/>
               <input 
                 type="text" 
                 value={razaData.nombre}
                 name="nombre" 
                 onChange={handleChange} 
-                //className={errors.nombre}
               />
               <br />
               {errores.nombre && <span>{errores.nombre}</span>}
               <br />
               <label htmlFor="">Peso Minimo(kg):</label>
+              <br/>
               <input 
                 type="number" 
                 name="pesoMinimo" 
@@ -167,6 +172,7 @@ export default function FormRegistroDogs(props){
               {errores.pesoMinimo&& <span>{errores.pesoMinimo}</span>}
               <br />
               <label htmlFor="">Peso Maximo(kg):</label>
+              <br/>
               <input 
                 type="number" 
                 name="pesoMaximo" 
@@ -177,6 +183,7 @@ export default function FormRegistroDogs(props){
               {errores.pesoMaximo && <span>{errores.pesoMaximo}</span>}
               <br />
               <label htmlFor="">Altura Minima(cm):</label>
+              <br/>
               <input 
                 type="number" 
                 name="alturaMinima" 
@@ -187,6 +194,7 @@ export default function FormRegistroDogs(props){
               {errores.alturaMinima && <span>{errores.alturaMinima}</span>}
               <br />
               <label htmlFor="">Altura Maxima(cm):</label>
+              <br/>
               <input 
                 type="number" 
                 name="alturaMaxima" 
@@ -197,6 +205,7 @@ export default function FormRegistroDogs(props){
               {errores.alturaMaxima && <span>{errores.alturaMaxima}</span>}
               <br />
               <label htmlFor="">TiempoVida(en años):</label>
+              <br/>
               <input 
                 type="number" 
                 name="tiempoVida" 
@@ -206,7 +215,8 @@ export default function FormRegistroDogs(props){
               <br />
               {errores.tiempoVida && <span>{errores.tiempoVida}</span>}
               <br />
-              <label htmlFor="">Imagen:</label>
+              <label htmlFor="">Imagen(url):</label>
+              <br/>
               <input 
                 type="text" 
                 name="image" 
@@ -217,6 +227,7 @@ export default function FormRegistroDogs(props){
               {errores.image && <span>{errores.image}</span>}
               <br />
               <label htmlFor="">Temperamento</label>
+              <br/>
               <input
                 type="text"
                 value={searchTerm}
@@ -235,7 +246,13 @@ export default function FormRegistroDogs(props){
               {errores.selectedTemperamentos && <span>{errores.selectedTemperamentos}</span>}
               <input type="hidden" value={selectedIdTemperamentos} readOnly />
               <br />
-              <button type="submit">Registrar</button>
+              <br />
+              <br />
+              <button className={styles.buttonDetail} type="submit">Registrar</button>
+            </div>
+            
+              
+          </div>
         </form>
     );
 }
