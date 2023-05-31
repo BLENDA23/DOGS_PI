@@ -9,7 +9,6 @@ const getDogsDetail = async (req, res) => {
     try {
       const {idRaza} = req.params;
       const {data} = await axios.get(URL+idRaza);
-      //const { id,name,bred_for,breed_group } = data;
       res.status(200).json(data);
      // res.send(URL+idRaza)
     } catch (error) {

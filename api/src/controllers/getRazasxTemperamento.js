@@ -7,6 +7,7 @@ const URL = "https://api.thedogapi.com/v1/breeds";
 const getRazasxTemperamento = async (req, res) => {
     try {
       const {temperamento} = req.params;
+      const tempMayus=temperamento[0].toUpperCase() + temperamento.substring(1);
       const {data} = await axios.get(URL);
       //const filtrar=data.filter(dog => dog.temperament.includes(temperamento));
      var dataTemperamentos=[];
@@ -14,7 +15,7 @@ const getRazasxTemperamento = async (req, res) => {
         if(data[i].temperament==undefined){
             continue;
         }
-        if(data[i].temperament.includes(temperamento)){
+        if(data[i].temperament.includes(tempMayus)){
             dataTemperamentos.push(data[i]); 
         }
      }

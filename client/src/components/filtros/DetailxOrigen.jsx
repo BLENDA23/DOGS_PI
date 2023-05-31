@@ -28,11 +28,6 @@ export default function DetailxOrigen() {
         } else if (orden === "Z-A") {
           sortedData.sort((a, b) => b.name.localeCompare(a.name));
         }
-        if (orden === "A-Z") {
-          sortedData.sort((a, b) => a.name.localeCompare(b.name));
-        } else if (orden === "Z-A") {
-          sortedData.sort((a, b) => b.name.localeCompare(a.name));
-        }
 
         setDogs(sortedData);
         setLoading(false); // Marcar que los datos se han cargado

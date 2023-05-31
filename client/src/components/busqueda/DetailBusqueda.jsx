@@ -12,11 +12,13 @@ export default function DetailBusqueda() {
       //console.log(ejemplo)
      // setDogs([...dogs,ejemplo])
       try{
-        const res = await fetch(`http://localhost:3001/dogs/${busquedaId}`)
+        const res = await fetch(`http://localhost:3001/dogsRaza?name=${busquedaId}`)
+        console.log(`http://localhost:3001/dogsRaza?name=${busquedaId}`)
         const data = await res.json()
-        .then (data => setDogs([...dogs, data]));
-        console.log("data");
-        console.log(dogs);
+        setDogs([...dogs, ...data]);
+        //.then (data => setDogs([...dogs, data]));
+        console.log("dataxxx");
+        console.log(data);
       }catch(error){
         console.error(error)
       }
