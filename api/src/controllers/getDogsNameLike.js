@@ -18,7 +18,14 @@ const getDogsNameLike = async (req, res) => {
        });
        // Buscar en la base de datos
        const dbFiltered = await buscarRazasILikeDB(nameQuery);
-       
+       const dataFixed= await apiFiltered.map((item)=>{
+        //arreglar datos de la data igual que la db
+        item.nombre=item.name;
+        item.altura=item.height.metric;
+        item.peso=item.weight.metric,
+        item.image=item.image.url
+        return item;
+       })
        // Combinar resultados de la API y la base de datos
       const results = [...apiFiltered,...dbFiltered];
 

@@ -30,17 +30,11 @@ export default function DetailBusqueda() {
     <div>
       {dogs.map((item) => (
             <div key={item.id} className={styles.containerInfo}>
-                <h1 className={styles.listItem}>{item.name}</h1>
-                <img src={item.image.url} alt="Not found" />
+                <h1 className={styles.listItem}>{item.nombre}</h1>
+                <img src={item.image} alt="Not found" />
                 <ul>
-                    <li>Peso: {item.weight.metric}</li>
-                    <li>Altura: {item.height.metric}</li>
-                    <li>Criado Para: {item.bred_for}</li>
-                    <li>Raza Grupo: {item.breed_group}</li>
-                    <li>Esperanza de Vida: {item.life_span}</li>
-                    <li>Temperamento: {item.temperament}</li>
-                    <li>Origen: {item.origin}</li>
-                    <li>Esperanza de Vida: {item.life_span}</li>
+                    <li>Peso: {item.peso}</li>
+                    <li>Altura: {item.altura}</li>
                 </ul>  
             </div>
             
