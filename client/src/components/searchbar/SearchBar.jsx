@@ -36,11 +36,9 @@ export default function SearchBar(props) {
       const { value } = event.target;
       setSelectedOption(value);
       setSelectedOptionOrigen(value);
+      setSelectedOptionAZ(value);
   };
-  const handleSelectChangeAZ = (event) => {
-    const { value } = event.target;
-    setSelectedOptionAZ(value);
-  };
+
   const handleSelectChangePeso = (event) => {
     const { value } = event.target;
     setSelectedOptionPeso(value);
@@ -67,20 +65,24 @@ export default function SearchBar(props) {
         <option value="API">API</option>
         <option value="DB">DB</option>
       </select>
+      <Link to={`/filtrarxOrigen?origen=${selectedOptionOrigen}`}>
+        <button>FiltrarxOrigen</button>
+      </Link>
 
-      <select value={selectedOptionAZ} onChange={handleSelectChangeAZ}>
+      <select value={selectedOptionAZ} onChange={handleSelectChange}>
       <option value="xx">Seleccionar</option>
         <option value="A-Z">A-Z</option>
         <option value="Z-A">Z-A</option>
       </select>
+      <Link to={`/filtrarxAZ/${selectedOptionAZ}`}>
+        <button>FiltrarxAZ</button>
+      </Link>
       <select value={selectedOptionPeso} onChange={handleSelectChangePeso}>
       <option value="xx">Seleccionar</option>
         <option value="menor-mayor">menor-mayor</option>
         <option value="mayor-menor">mayor-menor</option>
       </select>
-      <Link to={`/filtrarxOrigen?orden=${selectedOptionAZ}&origen=${selectedOptionOrigen}&peso${selectedOptionPeso}`}>
-        <button>Filtrar</button>
-      </Link>
+     
 
 
         <input type="search" onChange={handleInputChange} />

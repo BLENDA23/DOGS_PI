@@ -9,8 +9,6 @@ export default function DetailxOrigen() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const busquedaxOrigen = queryParams.get("origen");
-  const orden = queryParams.get("orden");
-  const peso = queryParams.get("peso");
   const [dogs, setDogs] = useState([]);
   const [loading, setLoading] = useState(true); // Variable de estado para controlar la carga de datos
   const [mostrarDiv, setMostrarDiv] = useState(false);
@@ -23,48 +21,34 @@ export default function DetailxOrigen() {
         const data = await res.json();
         let sortedData = [...data];
 
-        if (orden === "A-Z") {
-          sortedData.sort((a, b) => a.name.localeCompare(b.name));
-        } else if (orden === "Z-A") {
-          sortedData.sort((a, b) => b.name.localeCompare(a.name));
-        }
-
-        setDogs(sortedData);
+        setDogs(data);
         setLoading(false); // Marcar que los datos se han cargado
       } catch (error) {
         console.error(error);
       }
     };
-
+//db db db db db 
     const fetchDogDataDB = async () => {
       try {
         const response = await fetch("http://localhost:3001/razasDB");
         const data = await response.json();
-        let sortedData = [...data];
-
-        if (orden === "A-Z") {
-          sortedData.sort((a, b) => a.nombre.localeCompare(b.nombre));
-        } else if (orden === "Z-A") {
-          sortedData.sort((a, b) => b.nombre.localeCompare(a.nombre));
-        }
-        
-        setDogs(sortedData);
+        setDogs(data);
         setLoading(false); // Marcar que los datos se han cargado
       } catch (error) {
         console.error("Error al obtener los temperamentos:", error);
       }
     };
 
-    if (busquedaxOrigen === "API" && (orden=='A-Z' || orden=='Z-A')) {
+    if (busquedaxOrigen === "API") {
       fetchDogDataApi();
       setMostrarDiv(true);
       setRaza("API");
-    } else if (busquedaxOrigen === "DB" &&(orden=='A-Z' || orden=='Z-A')) {
+    } else if (busquedaxOrigen === "DB") {
       fetchDogDataDB();
       setMostrarDiv(false);
       setRaza("DB");
     }
-  }, [busquedaxOrigen, orden]);
+  }, [busquedaxOrigen]);
 
   if (loading) {
     return <div>Cargando...</div>; // Mostrar un indicador de carga mientras se obtienen los datos
