@@ -27,7 +27,7 @@ const getDogsNameLike = async (req, res) => {
         return item;
        })
        // Combinar resultados de la API y la base de datos
-      const results = [...apiFiltered,...dbFiltered];
+      const results = [...dataFixed,...dbFiltered];
 
       if (results.length > 0) {
         res.status(200).json(results);

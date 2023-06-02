@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate,Link } from "react-router-dom";
 import styles from "./DetailBusqueda.module.css";
-export default function DetailBusqueda() {
+export default function DetailBusqueda(nombre) {
   const navigate = useNavigate();
   const { busquedaId } = useParams();
   const [dogs, setDogs] = useState([]);
@@ -42,6 +42,5 @@ export default function DetailBusqueda() {
           <br/>
         <button id="refresh" className={styles.buttonDetail} onClick={() => navigate(-1)}>Regresar</button> 
     </div>
-   
   );
 }

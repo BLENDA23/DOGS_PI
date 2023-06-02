@@ -6,9 +6,7 @@ import SearchBar from "../searchbar/SearchBar";
 export default function DetailTemperamento() {
   const navigate = useNavigate();
   const { busquedaTemperamento } = useParams();
-  console.log(busquedaTemperamento)
-  console.log(busquedaTemperamento)
-  const [dogs, setDogs] = useState([]);
+  const [dogsxTemperamento, setDogsxTemperamento] = useState([]);//para razasxtemperamento
  
   useEffect(() => {
     const fetchTemperamento = async () => {
@@ -17,9 +15,7 @@ export default function DetailTemperamento() {
             `http://localhost:3001/razasxtemperamentos/${busquedaTemperamento}`
         )
         const data = await res.json()
-        setDogs(data)
-        console.log('data');
-          console.log(data);
+        setDogsxTemperamento(data)
       } catch (error) {
         console.error(error)
       }
@@ -42,7 +38,7 @@ export default function DetailTemperamento() {
   const endIndex = startIndex + itemsPerPage;
 
   // Filtrado de elementos según el rango de índices
-  const paginatedItems = dogs.slice(startIndex, endIndex);
+  const paginatedItems = dogsxTemperamento.slice(startIndex, endIndex);
 
   return (
     

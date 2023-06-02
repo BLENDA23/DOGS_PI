@@ -1,21 +1,22 @@
 import './App.css';
 import { useEffect, useState } from "react";
 import Bienvenida from "./components/bienvenida/Bienvenida";
+
 import HomePage from "./components/homePage/HomePage";
 import Nav from "./components/nav/Nav";
 import About from "./components/homePage/HomePage";
 import Cards from "./components/cards/Cards";
 import Detail from "./components/detail/Detail";
 import DetailBusqueda from "./components/busqueda/DetailBusqueda";
-import DetailTemperamento from "./components/filtros/DetailTemperamento";
 import DetailxOrigen from "./components/filtros/DetailxOrigen";
 import FormRedistroDogs from "./components/formRegistroDogs/FormRegistroDogs";
 import { Routes, Route,useLocation, useNavigate,useParams  } from "react-router-dom";
 function App() {
-  const navigate = useNavigate();
-  const location = useLocation();
   const [dogs, setDogs] = useState([]);
-  const [raza, setRaza] = useState([]);
+  const [dogsxTemperamento, setDogsxTemperamento] = useState([]);//para razasxtemperamento
+  const location = useLocation();
+ 
+
   useEffect(() => {
     const fetchDogData = async () => {
       try {
@@ -26,36 +27,8 @@ function App() {
         console.error(error)
       }
     }
-   // setSearched(false)
     fetchDogData()
   }, [])
-  /*
-  const ejemplo={
-    weight: {
-        imperial: "6 - 13",
-        metric: "3 - 6"
-    },
-    height: {
-        imperial: "9 - 11.5",
-        metric: "23 - 29"
-    },
-    id: 1,
-    name: "Affenpinscher",
-    bred_for: "Small rodent hunting, lapdog",
-    breed_group: "Toy",
-    life_span: "10 - 12 years",
-    temperament: "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
-    origin: "Germany, France",
-    reference_image_id: "BJa4kxc4X",
-    image: {
-        id: "BJa4kxc4X",
-        width: 1600,
-        height: 1199,
-        url: "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg"
-    }
-}
-*/
-
   const registroRaza=async (razaData)=>{
       const{nombre,peso,altura,tiempoVida,image,temperamento}=razaData;
       const url='http://localhost:3001/dogsP/';
@@ -88,6 +61,22 @@ function App() {
         console.error('Error de red:', error);
       }
   }
+  //razas por temperamento
+  useEffect(() => {
+    const fetchTemperamento = async () => {
+      const busquedaTemperamento = location.pathname.split('/').pop();
+      try {
+        const res = await fetch(
+            `http://localhost:3001/razasxtemperamentos/${busquedaTemperamento}`
+        )
+        const data = await res.json()
+        setDogsxTemperamento(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchTemperamento()
+  }, [location])
 
   return (
     <div className="App">
@@ -99,7 +88,7 @@ function App() {
         <Route path="/crearDog" element={<FormRedistroDogs registroRaza={registroRaza}/>}></Route>
         <Route path="/detail/:detailId" element={<Detail />} />
         <Route path="/busqueda/:busquedaId" element={<DetailBusqueda />} />
-        <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<DetailTemperamento/>} />
+        <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<Cards dogs={dogsxTemperamento}/>} />
         <Route path="/filtrarxOrigen" element={<DetailxOrigen/>} />
       </Routes>
     </div>
