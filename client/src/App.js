@@ -15,20 +15,28 @@ function App() {
   const [dogs, setDogs] = useState([]);
   const [dogsxTemperamento, setDogsxTemperamento] = useState([]);//para razasxtemperamento
   const location = useLocation();
- 
+  const busquedaTemperamento = location.pathname.split('/').pop();
+  const filtrarAz = location.pathname.split('/').pop();
 
   useEffect(() => {
-    const fetchDogData = async () => {
+    const fetchData = async () => {
       try {
         const res = await fetch("http://localhost:3001/dogs")
         const data = await res.json()
-        setDogs(data)
+        let sortedData = data; // Guarda los datos originales sin ordenar
+        if (filtrarAz === 'A-Z') {
+          sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
+        }
+        if (filtrarAz === 'Z-A') {
+          sortedData = data.sort((a, b) => b.name.localeCompare(a.name));
+        }
+        setDogs(sortedData);
       } catch (error) {
         console.error(error)
       }
     }
-    fetchDogData()
-  }, [])
+    fetchData();
+  }, [filtrarAz]);
   const registroRaza=async (razaData)=>{
       const{nombre,peso,altura,tiempoVida,image,temperamento}=razaData;
       const url='http://localhost:3001/dogsP/';
@@ -64,13 +72,20 @@ function App() {
   //razas por temperamento
   useEffect(() => {
     const fetchTemperamento = async () => {
-      const busquedaTemperamento = location.pathname.split('/').pop();
+      
       try {
         const res = await fetch(
             `http://localhost:3001/razasxtemperamentos/${busquedaTemperamento}`
         )
         const data = await res.json()
-        setDogsxTemperamento(data)
+        let sortedData = data; // Guarda los datos originales sin ordenar
+        if (filtrarAz === 'A-Z') {
+          sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
+        }
+        if (filtrarAz === 'Z-A') {
+          sortedData = data.sort((a, b) => b.name.localeCompare(a.name));
+        }
+        setDogsxTemperamento(sortedData);
       } catch (error) {
         console.error(error)
       }
@@ -89,7 +104,8 @@ function App() {
         <Route path="/detail/:detailId" element={<Detail />} />
         <Route path="/busqueda/:busquedaId" element={<DetailBusqueda />} />
         <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<Cards dogs={dogsxTemperamento}/>} />
-        <Route path="/filtrarxOrigen" element={<DetailxOrigen/>} />
+        <Route path="/filtrarxOrigen" element={<DetailxOrigen/>}/>
+        <Route path="/filtrarxAZ/:filtrarAz" element={<Cards dogs={dogs}/>}/>
       </Routes>
     </div>
   );
