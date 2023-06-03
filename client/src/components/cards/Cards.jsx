@@ -4,11 +4,12 @@ import SearchBar from "../searchbar/SearchBar";
 import { useEffect, useState } from "react";
 export default function Cards(props) {
   const { dogs } = props;
+  console.log('card dogs');
   console.log(dogs);
   
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8; // Cantidad de elementos por página
-  const totalItems = 100; // Cantidad total de elementos en la lista
+  const totalItems = 800; // Cantidad total de elementos en la lista
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   // Función para cambiar de página

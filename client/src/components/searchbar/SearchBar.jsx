@@ -6,10 +6,11 @@ export default function SearchBar(props) {
   console.log(props); // {onSearch: fn()}
   const [dogs, setDogs] = useState("");
   const [temperamentos, setTemperamentos] = useState([]);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOptionTem, setSelectedOptionTem] = useState("");
   const [selectedOptionOrigen, setSelectedOptionOrigen] = useState("");
   const [selectedOptionAZ, setSelectedOptionAZ] = useState("");
   const [selectedOptionPeso, setSelectedOptionPeso] = useState("");
+  const [showSelect, setShowSelect] = useState(false);
   useEffect(() => {
     fetchTemperamentos();
   }, []);
@@ -32,63 +33,86 @@ export default function SearchBar(props) {
     const { value } = event.target;
     setDogs(value);
   };
-  const handleSelectChange = (event) => {
+  const handleSelectChangeTemp = (event) => {
       const { value } = event.target;
-      setSelectedOption(value);
-      setSelectedOptionOrigen(value);
-      setSelectedOptionAZ(value);
+      setSelectedOptionTem(value);
+      setShowSelect(true);
+  };
+  const handleSelectChangeOrigen = (event) => {
+    const { value } = event.target;
+    setSelectedOptionOrigen(value);
   };
 
   const handleSelectChangePeso = (event) => {
     const { value } = event.target;
     setSelectedOptionPeso(value);
   };
+  const handleSelectChangeAz = (event) => {
+    const { value } = event.target;
+    setSelectedOptionAZ(value);
+  };
+
 
  
 
   return (
     <div className={styles.container}>
-      <select value={selectedOption} onChange={handleSelectChange}>
-        <option value="">Selecciona un temperamento</option>
-        {temperamentos.map((temperamento) => (
-          <option key={temperamento.id} value={temperamento.temperamento}>
-            {temperamento.temperamento}
-          </option>
-        ))}
-      </select>
-      <Link to={`/filtrarTemperamento/${selectedOption}`}>
-        <button>FiltrarxTemperamento</button>
-      </Link>
+      <div>
+      <Link to={`/filtrarTemperamento/${selectedOptionTem}`}>
+        <select value={selectedOptionTem} onChange={handleSelectChangeTemp}>
+          <option value="">Selecciona un temperamento</option>
+          {temperamentos.map((temperamento) => (
+            <option key={temperamento.id} value={temperamento.temperamento}>
+              {temperamento.temperamento}
+            </option>
+          ))}
+        </select>
+          <button>FiltrarxTemperamento</button>
+      </Link> 
+      
+        
+      </div>
+      {showSelect && (
+        <div>
+          <select value={selectedOptionAZ} onChange={handleSelectChangeAz}>
+          <option value="xx">Seleccionar</option>
+            <option value="A-Z">A-Z</option>
+            <option value="Z-A">Z-A</option>
+          </select>
+          <Link to={`/filtrarxAZ/${selectedOptionAZ}/${selectedOptionTem}`}>
+            <button>Ordenar</button>
+          </Link>
 
-      <select value={selectedOptionOrigen} onChange={handleSelectChange}>
-      <option value="xx">Seleccionar</option>
-        <option value="API">API</option>
-        <option value="DB">DB</option>
-      </select>
-      <Link to={`/filtrarxOrigen?origen=${selectedOptionOrigen}`}>
-        <button>FiltrarxOrigen</button>
-      </Link>
-
-      <select value={selectedOptionAZ} onChange={handleSelectChange}>
-      <option value="xx">Seleccionar</option>
-        <option value="A-Z">A-Z</option>
-        <option value="Z-A">Z-A</option>
-      </select>
-      <Link to={`/filtrarxAZ/${selectedOptionAZ}`}>
-        <button>FiltrarxAZ</button>
-      </Link>
-      <select value={selectedOptionPeso} onChange={handleSelectChangePeso}>
-      <option value="xx">Seleccionar</option>
-        <option value="menor-mayor">menor-mayor</option>
-        <option value="mayor-menor">mayor-menor</option>
-      </select>
-     
-
-
-        <input type="search" onChange={handleInputChange} />
-      <Link to={`/busqueda/${dogs}`}>
-        <button>Buscar</button>
-      </Link>
+          <select value={selectedOptionPeso} onChange={handleSelectChangePeso }>
+          <option value="xx">Seleccionar Peso</option>
+            <option value="1-10">Menor-Mayor</option>
+            <option value="10-1">Mayor-menor</option>
+          </select>
+          <Link to={`/filtrarTempxPeso/${selectedOptionPeso}/${selectedOptionTem}`}>
+            <button>Ordenar</button>
+          </Link>
+        </div>
+        
+      )}
+      
+      <div>
+        <select value={selectedOptionOrigen} onChange={handleSelectChangeOrigen}>
+        <option value="xx">Seleccionar</option>
+          <option value="API">API</option>
+          <option value="DB">DB</option>
+        </select>
+        <Link to={`/filtrarxOrigen?origen=${selectedOptionOrigen}`}>
+          <button>FiltrarxOrigen</button>
+        </Link>
+      </div>
+      
+      <div>
+          <input type="search" onChange={handleInputChange} />
+        <Link to={`/busqueda/${dogs}`}>
+          <button>Buscar</button>
+        </Link>
+      </div>
+      
     </div>
   );
 }

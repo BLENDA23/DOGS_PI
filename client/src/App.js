@@ -16,14 +16,16 @@ function App() {
   const [dogsxTemperamento, setDogsxTemperamento] = useState([]);//para razasxtemperamento
   const location = useLocation();
   const busquedaTemperamento = location.pathname.split('/').pop();
-  const filtrarAz = location.pathname.split('/').pop();
+  const temp = location.pathname.split('/').pop();
+  const filtrarAz=location.pathname.split('/')[2];
+  const filtrarPeso=location.pathname.split('/')[2];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch("http://localhost:3001/dogs")
         const data = await res.json()
-        let sortedData = data; // Guarda los datos originales sin ordenar
+        let sortedData = [...data]; // Guarda los datos originales sin ordenar
         if (filtrarAz === 'A-Z') {
           sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
         }
@@ -72,26 +74,42 @@ function App() {
   //razas por temperamento
   useEffect(() => {
     const fetchTemperamento = async () => {
-      
       try {
         const res = await fetch(
             `http://localhost:3001/razasxtemperamentos/${busquedaTemperamento}`
         )
         const data = await res.json()
-        let sortedData = data; // Guarda los datos originales sin ordenar
+        let sortedData = [...data]; 
+        
         if (filtrarAz === 'A-Z') {
           sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
         }
         if (filtrarAz === 'Z-A') {
           sortedData = data.sort((a, b) => b.name.localeCompare(a.name));
         }
+        if(filtrarPeso==='1-10'){
+          sortedData = data.sort((a, b) => {
+            const weightA = parseFloat(a.weight.metric.split(' - ')[0]);
+            const weightB = parseFloat(b.weight.metric.split(' - ')[0]);
+            return weightA - weightB;
+          });
+        }
+        if(filtrarPeso==='10-1'){
+         sortedData = data.sort((a, b) => {
+            const weightA = parseFloat(a.weight.metric.split(' - ')[0]);
+            const weightB = parseFloat(b.weight.metric.split(' - ')[0]);
+            return weightB - weightA;
+          });
+        }
+
         setDogsxTemperamento(sortedData);
+       
       } catch (error) {
         console.error(error)
       }
     }
     fetchTemperamento()
-  }, [location])
+  }, [filtrarAz,filtrarPeso])
 
   return (
     <div className="App">
@@ -105,7 +123,8 @@ function App() {
         <Route path="/busqueda/:busquedaId" element={<DetailBusqueda />} />
         <Route path="/filtrarTemperamento/:busquedaTemperamento" element={<Cards dogs={dogsxTemperamento}/>} />
         <Route path="/filtrarxOrigen" element={<DetailxOrigen/>}/>
-        <Route path="/filtrarxAZ/:filtrarAz" element={<Cards dogs={dogs}/>}/>
+        <Route path="/filtrarxAZ/:filtrarAz/:temp" element={<Cards dogs={dogsxTemperamento}/>}/>
+        <Route path="/filtrarTempxPeso/:filtrarPeso/:temp" element={<Cards dogs={dogsxTemperamento}/>}/>
       </Routes>
     </div>
   );
