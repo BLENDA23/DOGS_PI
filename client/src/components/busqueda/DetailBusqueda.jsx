@@ -35,6 +35,7 @@ export default function DetailBusqueda(nombre) {
                 <ul>
                     <li>Peso: {item.peso}</li>
                     <li>Altura: {item.altura}</li>
+                    <li>Tiempo de vida: {item.tiempoVida} años</li>
                 </ul>  
             </div>
             

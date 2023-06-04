@@ -23,7 +23,8 @@ const getDogsNameLike = async (req, res) => {
         item.nombre=item.name;
         item.altura=item.height.metric;
         item.peso=item.weight.metric,
-        item.image=item.image.url
+        item.image=item.image.url,
+        item.tiempoVida=item.life_span
         return item;
        })
        // Combinar resultados de la API y la base de datos

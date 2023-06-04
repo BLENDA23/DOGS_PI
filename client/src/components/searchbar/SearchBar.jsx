@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import styles from "./SearchBar.module.css";
-import { Link } from "react-router-dom";
+import { Link,useNavigate  } from "react-router-dom";
 
 export default function SearchBar(props) {
   console.log(props); // {onSearch: fn()}
+  const navigate = useNavigate();
   const [dogs, setDogs] = useState("");
   const [temperamentos, setTemperamentos] = useState([]);
   const [selectedOptionTem, setSelectedOptionTem] = useState("");
@@ -37,6 +38,7 @@ export default function SearchBar(props) {
       const { value } = event.target;
       setSelectedOptionTem(value);
       setShowSelect(true);
+      navigate(`/filtrarTemperamento/${value}`);
   };
   const handleSelectChangeOrigen = (event) => {
     const { value } = event.target;
@@ -58,7 +60,7 @@ export default function SearchBar(props) {
   return (
     <div className={styles.container}>
       <div>
-      <Link to={`/filtrarTemperamento/${selectedOptionTem}`}>
+      
         <select value={selectedOptionTem} onChange={handleSelectChangeTemp}>
           <option value="">Selecciona un temperamento</option>
           {temperamentos.map((temperamento) => (
@@ -67,9 +69,6 @@ export default function SearchBar(props) {
             </option>
           ))}
         </select>
-          <button>FiltrarxTemperamento</button>
-      </Link> 
-      
         
       </div>
       {showSelect && (
@@ -91,6 +90,8 @@ export default function SearchBar(props) {
           <Link to={`/filtrarTempxPeso/${selectedOptionPeso}/${selectedOptionTem}`}>
             <button>Ordenar</button>
           </Link>
+
+          
         </div>
         
       )}
@@ -112,6 +113,9 @@ export default function SearchBar(props) {
           <button>Buscar</button>
         </Link>
       </div>
+      <Link to={`/homePage`}>
+        <button>RESET</button>
+      </Link>
       
     </div>
   );
